@@ -1,13 +1,13 @@
 ---
 title: "🔍 博客架构演进与上游纯血对比 (Architecture Analysis)"
-date: "2026-10-05 10:56"
+date: "2026-10-05 13:00"
 category: "架构"
 tags:
   - "Architecture"
   - "VitePress"
 order: 17
 description: |-
-  深度解析 MagicCode 博客相比上游开源项目的重大架构演进，涵盖自动化测试门禁、Markdown 摘要渲染与相对路径自动重写。
+  深度解析 MagicNote 博客相比上游开源项目的重大架构演进，涵盖自动化测试门禁、Markdown 摘要渲染与相对路径自动重写。
 ---
 
 

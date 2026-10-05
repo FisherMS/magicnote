@@ -34,7 +34,7 @@ pnpm build
 ```typescript
 export default withMermaid(
     defineConfig({
-        title: `MagicCode`, // 博客主标题
+        title: `MagicNote`, // 博客主标题
         description: `Fisher's Blog. Learn to ask questions, good questions are more important than answers`, // 站点描述 (SEO)
         base: '/', // 站点根路径，若部署在子路径下请调整 (如 '/blog/')
         
@@ -43,11 +43,17 @@ export default withMermaid(
             copyrightUrl: 'https://aicro.net/', // 页脚版权跳转链接
             copyrightName: `AICROSOFT`, // 页脚版权所有人名称
             showFireworksAnimation: true, // 文章列表页是否启用点击烟花特效
+            // version: '2.11.0', // 可选覆盖：博客版本号 (默认自动取 package.json 中的 version)
+            // vitepressVersion: '1.6.4', // 可选覆盖：VitePress 引擎版本号 (默认自动从 package.json 依赖中动态提取)
             // ...
         }
     })
 )
 ```
+
+> **💡 页脚版本号自动解析机制**：
+> - **博客系统版本** (`v{{ version }}`)：优先读取 `themeConfig.version`，默认自动读取 `package.json` 的 `version` 字段（如 `v2.11.0`）；
+> - **VitePress 引擎版本** (`VitePress - {{ vitepressVersion }}`)：优先读取 `themeConfig.vitepressVersion`，默认自动从 `package.json` 的 `devDependencies.vitepress` 动态提取纯版本号（自动规整 `^` / `~` 等前缀符号），依赖升级时页脚展示与真实版本实时对齐。
 
 ### 2. 导航栏菜单 (`themeConfig.nav`)
 ```typescript
