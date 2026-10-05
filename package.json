@@ -1,37 +1,57 @@
 {
-    "name": "ti.bi",
-    "version": "1.0.0",
-    "description": "",
+    "name": "magicnote",
+    "version": "2.11.0",
+    "description": "MagicNote - Modern technical blog based on VitePress",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/FisherMS/magicnote.git"
+    },
     "main": "index.js",
+    "author": {
+        "name": "fisher",
+        "email": "fisher@aicrosoft.com",
+        "url": "https://aicrosoft.com/"
+    },
+    "homepage": "https://aicrosoft.com/",
+    "keywords": [],
+    "license": "MIT",
+    "type": "module",
     "scripts": {
         "dev": "vitepress dev --host 0.0.0.0",
-        "build": "cross-env NODE_ENV=production vitepress build",
-        "preview": "cross-env NODE_ENV=production vitepress preview"
+        "build": "vitepress build",
+        "prod": "cross-env NODE_ENV=production vitepress build",
+        "preview": "cross-env NODE_ENV=production vitepress preview",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "coverage": "vitest run --coverage"
     },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "type": "module",
     "devDependencies": {
         "@types/fs-extra": "^11.0.4",
-        "@types/node": "^26.6.2",
-        "@typescript-eslint/eslint-plugin": "^8.70.0",
-        "@typescript-eslint/parser": "^8.70.0",
-        "@typescript-eslint/types": "^8.70.0",
+        "@types/node": "^26.6.4",
+        "@typescript-eslint/eslint-plugin": "^8.51.0",
+        "@typescript-eslint/parser": "^8.51.0",
+        "@typescript-eslint/types": "^8.51.0",
+        "@vitest/coverage-v8": "^5.0.3",
         "@vue/compiler-sfc": "^3.5.43",
         "cross-env": "^10.1.0",
         "esbuild": "^0.28.2",
-        "eslint": "^10.11.0",
+        "eslint": "^10.12.0",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.6",
         "eslint-plugin-vue": "^10.11.0",
-        "fs-extra": "^11.4.0",
+        "fs-extra": "^11.4.1",
         "globby": "^16.2.4",
         "gray-matter": "^4.0.3",
+        "happy-dom": "^20.0.11",
+        "medium-zoom": "^1.1.0",
         "prettier": "^3.9.8",
         "typescript": "^6.0.3",
+        "vite": "^8.3.2",
         "vitepress": "^1.6.4",
-        "vite": "^8.3.0",
-        "vitepress-plugin-comment-with-giscus": "^1.1.15"
-    }
+        "vitepress-plugin-comment-with-giscus": "^1.1.15",
+        "vitepress-plugin-mermaid": "^2.0.17",
+        "vitepress-sidebar": "^1.33.1",
+        "vitest": "^5.0.3"
+    },
+    "packageManager": "pnpm@10.27.0"
 }

@@ -4,10 +4,15 @@ dist
 dist-ssr
 *.local
 .idea
+pnpm-lock.yaml
 smartmontools.md
 zsh_history.md
 /*.md
-!/changelog.md
 /package-lock.json
 origin_theme.css
 .vitepress/cache
+.vitepress/pages
+.vitepress/.temp
+## Need tarce
+!README.md
+!/changelog.md

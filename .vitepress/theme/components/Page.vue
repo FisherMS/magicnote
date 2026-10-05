@@ -6,9 +6,12 @@
                 <a :href="withBase(article.regularPath)"> {{ article.frontMatter.title }}</a>
             </div>
         </div>
-        <p class="describe" v-html="article.frontMatter.description"></p>
-        <div class='post-info'>
-            {{ article.frontMatter.date }} <span v-for="item in article.frontMatter.tags"><a :href="withBase(`/pages/tags.html?tag=${item}`)"> {{ item }}</a></span>
+        <div class="describe" v-html="renderDescriptionMarkdown(article.frontMatter.description, article.regularPath)"></div>
+        <div class="post-info">
+            {{ article.frontMatter.date }}
+            <span v-for="item in article.frontMatter.tags"
+                ><a :href="withBase(`/pages/tags.html?tag=${item}`)"> {{ item }}</a></span
+            >
         </div>
     </div>
 
@@ -28,10 +31,10 @@
 </template>
 
 <script lang="ts" setup>
-
 import { withBase } from 'vitepress'
 import { PropType, computed } from 'vue'
 import { generatePaginationArray } from '../pagination'
+import { renderDescriptionMarkdown } from '../functions'
 interface Article {
     regularPath: string
     frontMatter: {
@@ -75,22 +78,23 @@ const pageArray = computed(() => {
 .post-title {
     font-size: 1.0625rem;
     font-weight: 500;
-    color: var(--bt-theme-title)!important;
+    color: var(--bt-theme-title) !important;
     margin: 0.1rem 0;
 }
-.post-title a{
-    color: var(--bt-theme-title)!important;
+.post-title a {
+    color: var(--bt-theme-title) !important;
 }
 
 .describe {
     font-size: 0.9375rem;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
+    display: block;
+    overflow: visible;
     color: var(--vp-c-text-2);
     margin: 10px 0;
     line-height: 1.5rem;
+
+    /* -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; */
 }
 .pagination {
     margin-top: 16px;
@@ -99,12 +103,16 @@ const pageArray = computed(() => {
 }
 .link {
     display: inline-block;
-    width: 26px;
+    width: 28px;
     text-align: center;
     border: 1px var(--vp-c-divider) solid;
     border-right: none;
     font-weight: 400;
-    border-radius: 20px;
+}
+
+/* 最后一个 link 单独加右边框 */
+.link:last-child {
+    border-right: 1px solid var(--vp-c-divider);
 }
 .link.active {
     background: var(--vp-c-text-1);
@@ -133,10 +141,12 @@ const pageArray = computed(() => {
     .describe {
         font-size: 0.9375rem;
         display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
-        overflow: hidden;
+
+        overflow: block;
         margin: 0.5rem 0 1rem;
+
+        /* -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3; */
     }
 }
 </style>

@@ -4,11 +4,20 @@ import fs from 'fs-extra'
 import { resolve, join } from 'path'
 import { convertDateV2 } from './date'
 
-async function getPosts(pageSize: number) {
-    const isProd = process.env.NODE_ENV === 'production'
-    const ignorePaths = isProd ? ['posts/draft/**/*.md', 'posts/private-notes/**/*.md', 'posts/trash/**/*.md'] : []
+// const devFolders = ['posts/private-notes/**/**.md']
 
-    let paths = await globby(['posts/**/**.md'], {
+async function getPosts(
+    pageSize: number,
+    isProd: boolean = true,
+    excludePosts: string[] = ['README.md'],
+    devFolders: string[] = []
+) {
+    const showFolders = !isProd ? devFolders : ['posts/**/**.md']
+    const ignorePaths = isProd ? excludePosts : []
+
+    console.log('showFolders-->', showFolders)
+
+    let paths = await globby(showFolders, {
         ignore: ignorePaths
     })
 
@@ -19,12 +28,14 @@ async function getPosts(pageSize: number) {
         paths.map(async (item) => {
             const content = await fs.readFile(item, 'utf-8')
             const { data } = matter(content)
+            const order = _convertOrder(data.order)
             return {
                 frontMatter: {
                     ...data,
+                    // 处理日期：无效日期回退当前时间
                     date: convertDateV2(data.date),
                     // 处理 order：非数值时强制转换为 0
-                    order: _convertOrder(data.order)
+                    order
                 },
                 regularPath: `/${item.replace('.md', '.html')}`
             }
@@ -81,4 +92,4 @@ function _convertOrder(input?: unknown): number {
     return isNaN(num) ? 0 : num
 }
 
-export { getPosts }
+export { getPosts, _compareDate, _convertOrder }
