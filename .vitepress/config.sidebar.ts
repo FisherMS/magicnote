@@ -1,0 +1,45 @@
+import { generateSidebar } from 'vitepress-sidebar';
+
+const vitepressSidebarOptions = {
+    documentRootPath: '/', // 文档根目录
+    // scanStartPath: null,
+    // resolvePath: null,
+    useTitleFromFileHeading: true,
+    // useTitleFromFrontmatter: true,
+    // frontmatterTitleFieldName: 'title',
+    // useFolderTitleFromIndexFile: false,
+    // useFolderLinkFromIndexFile: false,
+    // hyphenToSpace: true,
+    // underscoreToSpace: true,
+    // capitalizeFirst: false,
+    // capitalizeEachWords: false,
+    collapsed: true,
+    collapseDepth: 2,
+    // sortMenusByName: false,
+    // sortMenusByFrontmatterOrder: false,
+    // sortMenusByFrontmatterDate: false,
+    // sortMenusOrderByDescending: false,
+    // sortMenusOrderNumericallyFromTitle: false,
+    // sortMenusOrderNumericallyFromLink: false,
+    // frontmatterOrderDefaultValue: 0,
+    // manualSortFileNameByPriority: ['first.md', 'second', 'third.md'],
+    // removePrefixAfterOrdering: false,
+    // prefixSeparator: '.',
+    // excludeFiles: ['first.md', 'secret.md'],
+    // excludeFilesByFrontmatterFieldName: 'exclude',
+    // excludeFolders: ['secret-folder'],
+    // includeDotFiles: false,
+     //includeRootIndexFile: false,
+     //includeFolderIndexFile: false,
+    // includeEmptyFolder: false,
+    // rootGroupText: 'Contents',
+    // rootGroupLink: 'https://github.com/jooy2',
+    // rootGroupCollapsed: false,
+    // convertSameNameSubFileToGroupIndexPage: false,
+    // folderLinkNotIncludesFileName: false,
+    // keepMarkdownSyntaxFromTitle: false,
+    // debugPrint: false,
+  };
+
+  export default generateSidebar(vitepressSidebarOptions);
+

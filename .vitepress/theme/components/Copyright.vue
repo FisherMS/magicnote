@@ -1,16 +1,25 @@
 <template>
     <div class="site-footer">
-        MIT Licensed | Copyright © 2021-present <a class="vitepress" :href="website">{{ webTitle }}</a><br />
-        Powered by <a class="vitepress" target="_blank" href="//vitepress.vuejs.org/">VitePress - 1.6.4</a>
+        Copyright © 2025 - Present
+        <a class="vitepress" :href="copyrightUrl"  target="_blank" >{{ copyrightName }}</a> |
+        <a class="vitepress" :href="repLink"  target="_blank" >{{ repName }}</a>
+        <span> v{{ version }}</span>
+        <br />
+        Powered by <a class="vitepress" target="_blank" href="//vitepress.vuejs.org/">VitePress - 1.6.3</a>
         Theme by <a class="vitepress" target="_blank" href="//github.com/airene/vitepress-blog-pure">Vitepress-blog</a>
     </div>
 </template>
 <script lang="ts" setup>
 import { useData } from 'vitepress'
+import pkg from '../../../package.json'
 
 const { site, theme } = useData()
-const website = theme.value.website
 const webTitle = site.value.title
+const copyrightName = theme.value.copyrightName
+const copyrightUrl = theme.value.copyrightUrl
+const repName = "MagicNote"
+const repLink = "https://github.com/FisherMS/magicnote"
+const version = theme.value.version || pkg.version
 </script>
 
 <style>

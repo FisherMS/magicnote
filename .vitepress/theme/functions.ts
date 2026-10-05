@@ -38,23 +38,77 @@ export function initCategory(posts: Post[]) {
     return data
 }
 
-export function useYearSort(post: Post[]) {
-    const data: Post[][] = []
-    let year = '0'
-    let num = -1
-    for (let index = 0; index < post.length; index++) {
-        const element = post[index]
-        if (element.frontMatter.date) {
-            const y = element.frontMatter.date.split('-')[0]
-            if (y === year) {
-                data[num].push(element)
-            } else {
-                num++
-                data[num] = []
-                data[num].push(element)
-                year = y
-            }
+export function useYearSort(posts: Post[]): Post[][] {
+    const grouped: Record<string, Post[]> = {}
+
+    posts.forEach((post) => {
+        const dateStr = post.frontMatter.date
+        const year = new Date(dateStr).getFullYear().toString()
+        if (!grouped[year]) {
+            grouped[year] = []
+        }
+        grouped[year].push(post)
+    })
+
+    const sortedYears = Object.keys(grouped).sort((a, b) => Number(b) - Number(a))
+
+    return sortedYears.map((year) => grouped[year].sort((a, b) => b.frontMatter.date.localeCompare(a.frontMatter.date)))
+}
+
+import { marked } from 'marked'
+
+marked.setOptions({
+    gfm: true,
+    breaks: true
+})
+
+/**
+ * 将 FrontMatter 中的 Markdown 编译为 HTML，并自动将相对路径转换为正确绝对路径
+ * @param content 原始 Markdown 字符串
+ * @param regularPath 文章的路由路径（如 /posts/draft/example.html）
+ */
+export function renderDescriptionMarkdown(content?: string, regularPath?: string): string {
+    if (!content || typeof content !== 'string') return ''
+
+    let processed = content.trim()
+    if (!processed) return ''
+
+    // 若提供了文章路由路径，自动修正其中的相对路径（针对图片与文件链接）
+    if (regularPath) {
+        const lastSlashIndex = regularPath.lastIndexOf('/')
+        const baseDir = lastSlashIndex !== -1 ? regularPath.substring(0, lastSlashIndex) : ''
+
+        if (baseDir) {
+            // 匹配 Markdown 中的链接与图片 [text](url) 或 ![alt](url)
+            processed = processed.replace(
+                /(!?\[.*?\]\()([^)]+)(\))/g,
+                (match, prefix, url, suffix) => {
+                    const trimmedUrl = url.trim()
+                    if (/^(https?:|\/|#|mailto:)/i.test(trimmedUrl)) {
+                        return match
+                    }
+                    const cleanUrl = trimmedUrl.replace(/^\.\//, '')
+                    return `${prefix}${baseDir}/${cleanUrl}${suffix}`
+                }
+            )
         }
     }
-    return data
+
+    try {
+        return marked.parse(processed, { async: false }) as string
+    } catch (e) {
+        console.error('Failed to parse description markdown:', e)
+        return content
+    }
+}
+
+/**
+ * 动态检测摘要文本中是否包含图片（同时支持 Markdown 语法与原生 HTML <img> 标签）
+ * @param content 摘要文本
+ * @returns true 表示包含图片，false 表示为纯文本/无图片
+ */
+export function hasImageInDescription(content?: string): boolean {
+    if (!content || typeof content !== 'string') return false
+    // 匹配 Markdown 语法 ![alt](url) 或 HTML 语法 <img ...>
+    return /!\[.*?\](?:\(.*?\)|\[.*?\])|<img\b[^>]*>/i.test(content)
 }
