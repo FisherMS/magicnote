@@ -6,6 +6,6 @@
     </linearGradient>
   </defs>
   <rect width="600" height="300" rx="16" fill="url(#grad)" />
-  <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-size="28" font-family="sans-serif" font-weight="bold">MagicCodeBlog</text>
+  <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-size="28" font-family="sans-serif" font-weight="bold">MagicNote</text>
   <text x="50%" y="62%" dominant-baseline="middle" text-anchor="middle" fill="#93c5fd" font-size="16" font-family="sans-serif">Open Source &amp; Powered by VitePress</text>
 </svg>

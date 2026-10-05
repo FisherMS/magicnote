@@ -1,5 +1,5 @@
 ---
-title: "欢迎使用 MagicCode 博客模板 (Hello World)"
+title: "欢迎使用 MagicNote 博客模板 (Hello World)"
 date: "2026-10-01 10:00"
 category: "指南"
 tags:
@@ -9,7 +9,7 @@ order: 1
 description: "欢迎使用基于 VitePress 深度定制的个人技术博客模板！本文演示基础排版、代码高亮与分类标签。"
 ---
 
-# 欢迎使用 MagicCode 博客模板
+# 欢迎使用 MagicNote 博客模板
 
 这是一篇用于演示博客系统基础功能的示例文章。本博客模板基于 [VitePress](https://vitepress.dev/) 深度定制，兼具极速加载与现代感阅读体验。
 
