@@ -34,8 +34,7 @@ export default withMermaid(
         srcExclude: isProd ? excludePosts : ['README.md'],
         vite: {
             //build: { minify: false }
-            server: { port: 5600 }
-            ,
+            server: { port: 5600 },
             build: {
                 chunkSizeWarningLimit: 1000 // 提高阈值至 1000 KB，消除告警
             },

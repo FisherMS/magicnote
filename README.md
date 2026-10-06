@@ -17,7 +17,10 @@
 
 ---
 
-## 一、 核心特性与增强能力
+## 一、 核心特性与架构演进 (v2.11 独立演进全景)
+
+![MagicNote 架构演进与特性全景](./docs/changes/v2_11_release_cover.jpg)
+
 
 - **极简架构 & 纯净 SSG**：基于 VitePress 1.x 原生内核，打包产物轻量、加载极速。
 - **自动化文章分页流水线**：
@@ -27,6 +30,9 @@
   - FrontMatter 的 `description` 支持原生 Markdown 语法（加粗、斜体、列表、超链接、图片等）；
   - **相对路径自动重写**：自动将文章摘要中的相对路径（如 `./images/pic.png`）转换为站点根路径，彻底杜绝首页列表 404 断裂；
   - **正文页图文摘要智能规避**：若摘要中包含图片，进入文章正文详情页后自动隐去摘要，避免首屏图片重复，纯文字摘要则正常保留展示。
+- **资源权责隔离与纯粹声明式架构**：
+  - 严格隔离开发者公共资产（`public/`）与博主内容资产（`posts/`），严禁跨界混杂；
+  - 移除侵入式的底层文件流代理与跨目录复制钩子，恢复纯粹的 VitePress 声明式配置，并通过 CI 审计门禁确保资产纯净安全。
 - **技术图表绘制**：内置 `vitepress-plugin-mermaid`，原生支持在 Markdown 中编写 Flowchart、Sequence、Class 等技术架构图。
 - **图片全屏灯箱放大**：集成 `medium-zoom`，支持路由无刷新切换，文章及详情页插图点击即放大。
 - **自动化测试质量门禁**：
@@ -113,8 +119,8 @@ description: |-
 │   │   ├── index.ts            # 主题入口、MediumZoom 与 GA 注册
 │   │   └── serverUtils.ts      # Node 编译期文章扫描与分页生成逻辑
 ├── pages/                      # 基础索引页面 (category, archives, tags, about)
-├── posts/                      # 博客 Markdown 源文件
-├── public/                     # 网站静态资源 (logo, favicon 等)
+├── posts/                      # 博主内容资产库 (博文 Markdown 与文章专属插图/多媒体)
+├── public/                     # 开发者全局公共资源 (站点 logo, favicon 等)
 ├── tests/                      # Vitest 单元测试套件
 ├── docs/                       # 项目架构、版本演进与发布文档体系
 │   ├── index.md                # 统一文档中心门户 (Documentation Portal)
@@ -127,6 +133,19 @@ description: |-
 │   └── changes/                # 历史各版本独立技术详单库 (如 v2.11.md)
 └── package.json
 ```
+
+### 资源权责划分与边界隔离原则 (Resource Boundaries)
+
+为了保障工程架构的长期高内聚与低耦合，MagicNote 确立了严格的资源权责隔离规范：
+
+1. **`public/` 目录归【开发者管理】**：
+   - 仅用于存放站点的**全局公共静态资源**（如 `public/favicon.ico`、`public/assets/logo/` 等）；
+   - **绝对红线**：严禁将任何博文内容、博文配图或 `posts/` 业务目录复制或发布到 `public/` 目录下。CI 清洗与安全门禁会对 `public/posts` 进行零容忍拦截。
+2. **`posts/` 目录归【博主管理】**：
+   - 文章 Markdown 源文件以及博文所引用的插图、封面图等，由博主在文章同级或专属子目录下就地维护（如 `posts/2026/images/`）；
+   - 博主在 Markdown 中直接使用相对路径（如 `![演示](./images/pic.png)`）进行引用，由 VitePress 原生资产管道编译打包，杜绝跨越侵入 `public/`。
+3. **`.vitepress/config.ts` 保持纯粹声明式**：
+   - 站点配置文件严格保持声明式纯粹性，不充当 Node.js 静态文件流代理或跨目录文件搬运工，保障开发与构建的高效稳定。
 
 ---
 

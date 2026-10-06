@@ -1,10 +1,8 @@
 import { globby } from 'globby'
 import matter from 'gray-matter'
 import fs from 'fs-extra'
-import { resolve, join } from 'path'
+import { resolve } from 'path'
 import { convertDateV2 } from './date'
-
-// const devFolders = ['posts/private-notes/**/**.md']
 
 async function getPosts(
     pageSize: number,
