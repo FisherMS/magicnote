@@ -6,12 +6,35 @@ import { convertDateV2 } from './date'
 
 // const devFolders = ['posts/private-notes/**/**.md']
 
+async function syncPostAssets(isProd: boolean = false, excludePostNames: string[] = []) {
+    try {
+        const publicPostsDir = resolve('./public/posts')
+        const ignoreList = isProd ? excludePostNames.map((name) => `**/${name}/**`) : []
+        const dirs = await globby(['posts/**/images', 'posts/**/assets'], {
+            onlyDirectories: true,
+            ignore: ignoreList
+        })
+        for (const dir of dirs) {
+            const relPath = dir.replace(/^posts\//, '')
+            const dest = join(publicPostsDir, relPath)
+            await fs.ensureDir(dest)
+            await fs.emptyDir(dest)
+            await fs.copy(resolve(dir), dest, { overwrite: true })
+        }
+    } catch (err) {
+        console.warn('⚠️ 自动同步 posts 静态资源至 public 失败:', err)
+    }
+}
+
 async function getPosts(
     pageSize: number,
     isProd: boolean = true,
     excludePosts: string[] = ['README.md'],
     devFolders: string[] = []
 ) {
+    // 自动将 posts 下的图片资源镜像至 public/posts，确保 FrontMatter 摘要与列表页引用的图片 100% 进入 dist 产物
+    await syncPostAssets(isProd)
+
     const showFolders = !isProd ? devFolders : ['posts/**/**.md']
     const ignorePaths = isProd ? excludePosts : []
 
@@ -92,4 +115,4 @@ function _convertOrder(input?: unknown): number {
     return isNaN(num) ? 0 : num
 }
 
-export { getPosts, _compareDate, _convertOrder }
+export { getPosts, syncPostAssets, _compareDate, _convertOrder }
