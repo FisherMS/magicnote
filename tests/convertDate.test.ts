@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { convertDateV2 } from '../.vitepress/theme/date' // 根据实际路径修改
+import { convertDateV2, formatDateOnly } from '../.vitepress/core'
 
 describe('convertDateV2', () => {
     // 测试有效 Date 对象
@@ -57,5 +57,30 @@ describe('convertDateV2', () => {
         // 本地时间转换测试（需根据实际时区调整）
         const localDate = new Date(2023, 9, 5, 12, 30) // 本地时间 2023-10-05
         expect(convertDateV2(localDate)).toBe('2023-10-05')
+    })
+})
+
+describe('formatDateOnly', () => {
+    test('strips HH:mm time component cleanly', () => {
+        expect(formatDateOnly('2025-11-11 13:23')).toBe('2025-11-11')
+        expect(formatDateOnly('2025-04-29 07:24')).toBe('2025-04-29')
+        expect(formatDateOnly('2023-10-05 09:05:30')).toBe('2023-10-05')
+    })
+
+    test('handles pure date and ISO strings', () => {
+        expect(formatDateOnly('2025-11-11')).toBe('2025-11-11')
+        expect(formatDateOnly('2025-05-01T12:30:00Z')).toBe('2025-05-01')
+        expect(formatDateOnly('  2024-02-29  ')).toBe('2024-02-29')
+    })
+
+    test('handles Date objects', () => {
+        const date = new Date(2023, 9, 5)
+        expect(formatDateOnly(date)).toBe('2023-10-05')
+    })
+
+    test('handles empty, null and undefined inputs safely', () => {
+        expect(formatDateOnly('')).toBe('')
+        expect(formatDateOnly(null)).toBe('')
+        expect(formatDateOnly(undefined)).toBe('')
     })
 })

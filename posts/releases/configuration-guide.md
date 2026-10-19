@@ -1,13 +1,12 @@
 ---
 title: "🛠️ 博客模板环境配置与上线指引 (Configuration Guide)"
-date: "2026-10-06 08:48"
+date: "2026-10-19 10:25"
 category: "指南"
 tags:
   - "Guide"
   - "Config"
   - "Giscus"
   - "GA4"
-order: 18
 description: |-
   博客开源模板全套脱敏配置与环境参数指南，涵盖 GA4 衡量 ID、Google AdSense、Giscus 评论系统与 Cloudflare Pages 部署。
 ---

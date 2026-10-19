@@ -1,6 +1,6 @@
 {
     "name": "magicnote",
-    "version": "2.11.0",
+    "version": "3.0.0",
     "description": "MagicNote - Modern technical blog based on VitePress",
     "repository": {
         "type": "git",
@@ -17,13 +17,29 @@
     "license": "MIT",
     "type": "module",
     "scripts": {
-        "dev": "vitepress dev --host 0.0.0.0",
-        "build": "vitepress build",
-        "prod": "cross-env NODE_ENV=production vitepress build",
+        "dev": "cross-env VITE_BLOG_THEME=default vitepress dev --host 0.0.0.0",
+        "dev:minimal": "cross-env VITE_BLOG_THEME=minimal vitepress dev --host 0.0.0.0",
+        "build": "cross-env VITE_BLOG_THEME=default vitepress build",
+        "build:minimal": "cross-env VITE_BLOG_THEME=minimal vitepress build",
+        "build:all": "pnpm run build && pnpm run build:minimal",
+        "prod": "cross-env VITE_BLOG_THEME=default NODE_ENV=production vitepress build",
         "preview": "cross-env NODE_ENV=production vitepress preview",
         "test": "vitest run",
         "test:watch": "vitest",
-        "coverage": "vitest run --coverage"
+        "coverage": "vitest run --coverage",
+        "typecheck": "tsc --noEmit",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "format": "prettier --write \".vitepress/**/*.{ts,vue,json}\" \"tests/**/*.ts\"",
+        "format:write": "pnpm run format",
+        "format:check": "prettier --check \".vitepress/**/*.{ts,vue,json}\" \"tests/**/*.ts\"",
+        "check:static": "pnpm run typecheck && pnpm run lint",
+        "check:test": "pnpm run test",
+        "check:all": "pnpm run check:static && pnpm run check:test && pnpm run build:all",
+        "check:commit": "pnpm run format && pnpm run check:all",
+        "precommit": "pnpm run format:check && pnpm run lint && pnpm run typecheck && pnpm test",
+        "verify": "pnpm run precommit",
+        "ci": "pnpm run typecheck && pnpm run lint && pnpm run coverage && pnpm run build:all"
     },
     "devDependencies": {
         "@types/fs-extra": "^11.0.4",

@@ -6,7 +6,6 @@ tags:
   - "Markdown"
   - "Mermaid"
   - "图表"
-order: 2
 description: |-
   这是一篇进阶特性演示文章，演示首页摘要包含图片、Markdown 富文本排版与正文自动智能避让。
 

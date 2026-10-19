@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { _convertOrder, _compareDate } from '../.vitepress/theme/serverUtils'
+import { _convertOrder, _compareDate } from '../.vitepress/core/server/serverUtils'
 
 describe('serverUtils order and sorting logic', () => {
     describe('_convertOrder', () => {
@@ -53,6 +53,14 @@ describe('serverUtils order and sorting logic', () => {
             const list = [normalPost, orderedPost].sort(_compareDate)
             expect(list[0]).toBe(orderedPost)
             expect(list[1]).toBe(normalPost)
+        })
+
+        it('should return 0 when both order and date are strictly identical (symmetric comparator)', () => {
+            const postA = { frontMatter: { date: '2026-10-17', order: 1 } }
+            const postB = { frontMatter: { date: '2026-10-17', order: 1 } }
+
+            expect(_compareDate(postA, postB)).toBe(0)
+            expect(_compareDate(postB, postA)).toBe(0)
         })
     })
 })

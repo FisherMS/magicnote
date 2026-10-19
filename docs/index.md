@@ -11,13 +11,14 @@
 | **[📑 最新发布详单 (Release.md)](./Release.md)** | 最新版本的技术变更全单、依赖变动与质量门禁状态 | 研发人员 / 运维团队 |
 | **[🌟 读者发布通报 (ReleaseNote.md)](./ReleaseNote.md)** | 面向博客读者与终端访客的友好功能更新说明 | 站点访客 / 读者 |
 | **[📊 版本演进摘要 (changeLog.md)](./changeLog.md)** | 历史所有正式版本的核心要点概要与检索索引 | 研发团队 / 协作者 |
-| **[🗂️ 历史全量版本库 (changes/)](./changes/v2.11.md)** | 各历史版本独立技术详单（如 [v2.11.md](./changes/v2.11.md)） | 审计 / 历史溯源 |
+| **[🗂️ 历史全量版本库 (changes/)](./changes/v3.0.md)** | 各历史版本独立技术详单（如 [v3.0.md](./changes/v3.0.md)） | 审计 / 历史溯源 |
 
 ---
 
 ## 🛠️ 架构设计与工程规范
 
 - **[📖 子项目开发与维护手册 (README.md)](./README.md)**：包含本地启动、构建预览、测试运行、目录职责与设计原则；
+- **[🎨 多主题开发与接入指南 (theme-development-guide.md)](./theme-development-guide.md)**：规范多主题目录结构、Theme 契约实现、数据消费与编译期分发；
 - **[🛠️ 博客模板环境配置与上手指引 (configuration-guide.md)](./configuration-guide.md)**：包含站点脱敏配置、数据分析 (GA4)、广告接入 (AdSense)、评论系统 (Giscus) 与自动化部署实战；
 - **[🔍 博客架构演进与纯血对比 (vitepress-blog-pure-comparison.md)](./vitepress-blog-pure-comparison.md)**：对比纯血 VitePress 博客升级前后的架构优化、静态分页算法与核心收益。
 

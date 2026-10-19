@@ -17,11 +17,13 @@
 
 ---
 
-## 一、 核心特性与架构演进 (v2.11 独立演进全景)
+## 一、 核心特性与架构演进 (v3.0 多主题时代全景)
 
-![MagicNote 架构演进与特性全景](./docs/changes/v2_11_release_cover.jpg)
-
-
+- **🎨 开启多主题物理隔离架构 (Multi-Theme Architecture)**：
+  - 重构主题体系，确立“共享业务内核 (`.vitepress/core/`) + 可插拔主题 (`.vitepress/themes/`)”的高内聚解耦规范；
+  - 内置经典富交互主题（`default`）与极简阅读流主题（`minimal`），为未来演进完全不同的布局奠定开闭原则基础。
+- **⚡ 编译期按需分发器 (Theme Dispatcher)**：
+  - 通过环境变量 `VITE_BLOG_THEME` 在构建期静态装载指定主题，非激活主题源码与 CSS 经 Rollup 物理级 Tree-shaking 彻底剔除，保证产物零冗余与极致加载速度。
 - **极简架构 & 纯净 SSG**：基于 VitePress 1.x 原生内核，打包产物轻量、加载极速。
 - **自动化文章分页流水线**：
   - 自动扫描 `posts/` 目录中的文章并按日期和置顶权重排序；
@@ -55,8 +57,11 @@ pnpm install
 
 ### 2. 常用开发指令
 ```bash
-# 启动本地开发服务器（默认端口 5600）
+# 启动本地开发服务器（默认主题）
 pnpm dev
+
+# 启动极简主题开发服务器
+pnpm dev:minimal
 
 # 运行自动化单元测试
 pnpm test
@@ -64,8 +69,11 @@ pnpm test
 # 运行测试并生成覆盖率报告
 pnpm coverage
 
-# 全量生产环境 SSG 构建
+# 全量生产环境 SSG 构建（默认主题）
 pnpm build
+
+# 全量生产环境 SSG 构建（极简主题）
+pnpm build:minimal
 
 # 本地预览生产构建产物
 pnpm preview
@@ -111,26 +119,29 @@ description: |-
 ```text
 ├── .vitepress/
 │   ├── config.ts               # VitePress 站点核心配置 (Mermaid、SEO、搜索、构建)
-│   ├── theme/
-│   │   ├── components/         # 页面组件 (Page.vue、NewLayout.vue、Comment 等)
-│   │   ├── custom.css          # 自定义视觉样式与富媒体适配
-│   │   ├── date.ts             # 日期标准化核心算法
-│   │   ├── functions.ts        # 摘要 Markdown 渲染、路径重写与标签归类
-│   │   ├── index.ts            # 主题入口、MediumZoom 与 GA 注册
-│   │   └── serverUtils.ts      # Node 编译期文章扫描与分页生成逻辑
+│   ├── core/                   # 共享业务内核 (文章扫描、分页算法、日期与 Markdown 纯函数)
+│   │   ├── types.ts            # 数据契约与接口
+│   │   ├── server/             # Node 端 Markdown 解析与分页数据生成
+│   │   └── utils/              # 纯函数工具库 (date, pagination, functions)
+│   ├── themes/                 # 多主题物理隔离目录
+│   │   ├── default/            # 默认经典富交互博客主题
+│   │   ├── minimal/            # 极简示范主题 (单栏纯文字流)
+│   │   └── index.ts            # 主题注册表与编译期解析器 (Theme Dispatcher)
+│   └── theme/                  # VitePress 规范入口与向下兼容代理层
 ├── pages/                      # 基础索引页面 (category, archives, tags, about)
 ├── posts/                      # 博主内容资产库 (博文 Markdown 与文章专属插图/多媒体)
 ├── public/                     # 开发者全局公共资源 (站点 logo, favicon 等)
 ├── tests/                      # Vitest 单元测试套件
 ├── docs/                       # 项目架构、版本演进与发布文档体系
 │   ├── index.md                # 统一文档中心门户 (Documentation Portal)
-│   ├── Release.md              # 当前最新版本发布技术详单 (v2.11)
+│   ├── Release.md              # 当前最新版本发布技术详单 (v3.0)
 │   ├── ReleaseNote.md          # 面向读者的友好化版本更新通报
 │   ├── changeLog.md            # 历史版本核心要点摘要与检索索引
+│   ├── theme-development-guide.md # 多主题开发与接入指南
 │   ├── configuration-guide.md  # 博客模板环境配置与上线指引
 │   ├── README.md               # 版本控制与 CI/CD 发布管理规范
 │   ├── vitepress-blog-pure-comparison.md # 与上游主题深度对比与重构分析
-│   └── changes/                # 历史各版本独立技术详单库 (如 v2.11.md)
+│   └── changes/                # 历史各版本独立技术详单库 (如 v3.0.md)
 └── package.json
 ```
 

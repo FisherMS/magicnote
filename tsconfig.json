@@ -2,7 +2,7 @@
     "compilerOptions": {
         "target": "esnext",
         "module": "esnext",
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "strict": true,
         "noImplicitAny": true,
         "jsx": "preserve",
@@ -13,9 +13,8 @@
         "lib": ["ESNext", "DOM"],
         //"types": [],
         "types": ["vitepress/client"],
-        "baseUrl": "./",
         "paths": {
-            "@/*": ["src/*"]
+            "@/*": ["./src/*"]
         }
     },
     "include": [
