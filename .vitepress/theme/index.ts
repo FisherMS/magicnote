@@ -1,47 +1,15 @@
-import { Theme, useRoute } from 'vitepress'
-import DefaultTheme from 'vitepress/theme'
-import NewLayout from './components/NewLayout.vue'
-import Archives from './components/Archives.vue'
-import Category from './components/Category.vue'
-import Tags from './components/Tags.vue'
-import Page from './components/Page.vue'
-import Comment from './components/CommentGiscus.vue'
-import { App, onMounted, watch, nextTick } from 'vue' // 引入 Vue 的 App 类型
-import mediumZoom from 'medium-zoom'
+/**
+ * ============================================================================
+ * VitePress 官方约定主题入口（Theme Dispatcher）
+ * ============================================================================
+ * ⚠️ 架构说明：
+ * 1. VitePress 框架内部写死了自定义主题的加载路径为当前文件 (.vitepress/theme/index.ts)；
+ * 2. 为了实现多套完全不同布局的物理隔离与零冗余打包，所有具体主题均独立维护在 `.vitepress/themes/`；
+ * 3. 本文件作为唯一的编译期调度大门，依据构建环境变量 `VITE_BLOG_THEME` 静态分发导出目标主题；
+ * 4. 博客核心数据与算法（Markdown 扫描解析、分页逻辑、通用纯函数）统一收敛在 `.vitepress/core/`。
+ * ============================================================================
+ */
 
-import './custom.css'
+import { resolveTheme } from '../themes'
 
-export default {
-    ...DefaultTheme,
-    Layout: NewLayout,
-    enhanceApp({ app }: { app: App }) {
-        // 全局注册后，在Vue里就能直接使用了
-        app.component('Tags', Tags)
-        app.component('Category', Category)
-        app.component('Archives', Archives)
-        app.component('Page', Page)
-        app.component('Comment', Comment)
-    },
-
-    // 组合式 API 设置
-    setup() {
-        const route = useRoute()
-
-        const initZoom = () => {
-            mediumZoom('.main img', {
-                background: 'var(--vp-c-bg)',
-                margin: 24,
-                scrollOffset: 0
-            })
-        }
-
-        onMounted(() => {
-            initZoom()
-        })
-
-        watch(
-            () => route.path,
-            () => nextTick(() => initZoom())
-        )
-    }
-} satisfies Theme
+export default resolveTheme()

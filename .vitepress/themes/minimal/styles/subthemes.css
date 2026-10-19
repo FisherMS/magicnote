@@ -1,0 +1,105 @@
+/**
+ * Minimal 极简主题专属子主题（Sub-theme）样式变体定义
+ */
+
+/* 1. Nord (北欧极光冷淡风) */
+html[data-subtheme='nord'] {
+    --vp-c-brand: #5e81ac !important;
+    --vp-c-brand-1: #5e81ac;
+    --vp-c-brand-2: #81a1c1;
+    --vp-c-brand-3: #88c0d0;
+    --vp-c-bg: #eceff4;
+    --vp-c-bg-alt: #e5e9f0;
+    --vp-c-bg-elv: #ffffff;
+    --vp-c-bg-soft: #e5e9f0;
+    --vp-c-text-1: #2e3440;
+    --vp-c-text-2: #4c566a;
+}
+
+html.dark[data-subtheme='nord'] {
+    --vp-c-brand: #88c0d0 !important;
+    --vp-c-brand-1: #88c0d0;
+    --vp-c-brand-2: #81a1c1;
+    --vp-c-brand-3: #5e81ac;
+    --vp-c-bg: #2e3440;
+    --vp-c-bg-alt: #242933;
+    --vp-c-bg-elv: #3b4252;
+    --vp-c-bg-soft: #3b4252;
+    --vp-c-text-1: #eceff4;
+    --vp-c-text-2: #d8dee9;
+}
+
+/* 2. Warm Paper (暖阳羊皮纸护眼风) */
+html[data-subtheme='warm-paper'] {
+    --vp-c-brand: #d97706 !important;
+    --vp-c-brand-1: #d97706;
+    --vp-c-brand-2: #b45309;
+    --vp-c-bg: #fbf7ee;
+    --vp-c-bg-alt: #f3ecd8;
+    --vp-c-bg-elv: #fffdf9;
+    --vp-c-bg-soft: #f5eedb;
+    --vp-c-text-1: #382d27;
+    --vp-c-text-2: #6b5d52;
+}
+
+html.dark[data-subtheme='warm-paper'] {
+    --vp-c-brand: #f59e0b !important;
+    --vp-c-brand-1: #f59e0b;
+    --vp-c-brand-2: #d97706;
+    --vp-c-bg: #1c1815;
+    --vp-c-bg-alt: #161311;
+    --vp-c-bg-elv: #26211d;
+    --vp-c-bg-soft: #2d2621;
+    --vp-c-text-1: #f3ede2;
+    --vp-c-text-2: #c5b8a5;
+}
+
+/* 3. Forest (青翠翡翠森林系) */
+html[data-subtheme='forest'] {
+    --vp-c-brand: #059669 !important;
+    --vp-c-brand-1: #059669;
+    --vp-c-brand-2: #047857;
+    --vp-c-bg: #f4fbf7;
+    --vp-c-bg-alt: #e6f6ee;
+    --vp-c-bg-elv: #ffffff;
+    --vp-c-bg-soft: #eaf7f0;
+    --vp-c-text-1: #132e22;
+    --vp-c-text-2: #345c49;
+}
+
+html.dark[data-subtheme='forest'] {
+    --vp-c-brand: #34d399 !important;
+    --vp-c-brand-1: #34d399;
+    --vp-c-brand-2: #10b981;
+    --vp-c-bg: #13231c;
+    --vp-c-bg-alt: #0c1813;
+    --vp-c-bg-elv: #1a3026;
+    --vp-c-bg-soft: #203c2f;
+    --vp-c-text-1: #ecfdf5;
+    --vp-c-text-2: #a7f3d0;
+}
+
+/* 4. Dracula (紫罗兰霓虹暗夜) */
+html[data-subtheme='dracula'] {
+    --vp-c-brand: #7c3aed !important;
+    --vp-c-brand-1: #7c3aed;
+    --vp-c-brand-2: #6d28d9;
+    --vp-c-bg: #faf5ff;
+    --vp-c-bg-alt: #f3e8ff;
+    --vp-c-bg-elv: #ffffff;
+    --vp-c-bg-soft: #f5f3ff;
+    --vp-c-text-1: #2e1065;
+    --vp-c-text-2: #5b21b6;
+}
+
+html.dark[data-subtheme='dracula'] {
+    --vp-c-brand: #a78bfa !important;
+    --vp-c-brand-1: #a78bfa;
+    --vp-c-brand-2: #c084fc;
+    --vp-c-bg: #1e1b2e;
+    --vp-c-bg-alt: #171524;
+    --vp-c-bg-elv: #28243d;
+    --vp-c-bg-soft: #312c4c;
+    --vp-c-text-1: #f5f3ff;
+    --vp-c-text-2: #ddd6fe;
+}

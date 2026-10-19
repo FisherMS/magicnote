@@ -1,0 +1,121 @@
+/**
+ * Minimal 极简主题专属样式
+ */
+@import './subthemes.css';
+:root {
+    --minimal-max-width: 760px;
+    --minimal-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.minimal-container {
+    max-width: var(--minimal-max-width);
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: var(--minimal-font);
+}
+
+.minimal-header {
+    border-bottom: 1px solid var(--vp-c-divider);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.minimal-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+}
+
+.minimal-desc {
+    color: var(--vp-c-text-2);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.minimal-nav {
+    margin-top: 16px;
+    display: flex;
+    gap: 16px;
+}
+
+.minimal-nav a {
+    color: var(--vp-c-text-2);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.minimal-nav a:hover {
+    color: var(--vp-c-brand);
+}
+
+.minimal-article-item {
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed var(--vp-c-divider);
+}
+
+.minimal-article-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.minimal-article-title a {
+    color: var(--vp-c-text-1);
+    text-decoration: none;
+}
+
+.minimal-article-meta {
+    font-size: 0.85rem;
+    color: var(--vp-c-text-2);
+}
+
+.minimal-footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--vp-c-divider);
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--vp-c-text-3);
+}
+
+@media (max-width: 768px) {
+    .VPNavScreen {
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        padding: 0 20px !important;
+        box-sizing: border-box !important;
+    }
+    .VPNavScreen .container {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+        padding: 20px 0 60px !important;
+        box-sizing: border-box !important;
+    }
+    .VPNavScreenMenu,
+    .VPNavScreenMenuLink,
+    .VPNavScreenAppearance {
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
+
+.VPNavBar .content-body > .subtheme-wrapper {
+    order: 4;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 8px;
+}
+/* 原独立亮暗切换开关隐藏，由统一外观胶囊完整接管 */
+.VPNavBar .content-body > .appearance {
+    display: none !important;
+}
+.VPNavBar .content-body > .social-links {
+    order: 6;
+}
+.VPNavBar .content-body > .extra {
+    order: 7;
+}

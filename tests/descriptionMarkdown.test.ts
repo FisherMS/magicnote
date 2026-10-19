@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { renderDescriptionMarkdown, hasImageInDescription } from '../.vitepress/theme/functions'
+import { renderDescriptionMarkdown, hasImageInDescription } from '../.vitepress/core'
 
 describe('renderDescriptionMarkdown', () => {
     test('renders plain text and basic formatting', () => {
@@ -28,14 +28,24 @@ describe('renderDescriptionMarkdown', () => {
         expect(output).toContain('src="/posts/draft/images/pic.png"')
     })
 
+    test('rewrites relative paths in HTML img tags', () => {
+        const input = `前置文本 <img src="./images/diagram.svg" alt="diagram"> 后置文本`
+        const regularPath = '/posts/2026/my-article.html'
+        const output = renderDescriptionMarkdown(input, regularPath)
+
+        expect(output).toContain('src="/posts/2026/images/diagram.svg"')
+    })
+
     test('preserves absolute URLs and external protocols', () => {
-        const input = `[website](https://aicro.net) [local](/assets/logo.png) [anchor](#section)`
+        const input = `[website](https://aicro.net) [local](/assets/logo.png) [anchor](#section) [email](mailto:test@aicro.net) ![inline](data:image/svg+xml;base64,PHN2ZyB4bWxucz0=)`
         const regularPath = '/posts/2026/test.html'
         const output = renderDescriptionMarkdown(input, regularPath)
 
         expect(output).toContain('href="https://aicro.net"')
         expect(output).toContain('href="/assets/logo.png"')
         expect(output).toContain('href="#section"')
+        expect(output).toContain('href="mailto:test@aicro.net"')
+        expect(output).toContain('src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0="')
     })
 })
 
@@ -65,4 +75,3 @@ describe('hasImageInDescription', () => {
         expect(hasImageInDescription(undefined)).toBe(false)
     })
 })
-

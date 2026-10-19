@@ -17,15 +17,15 @@
 
 ## 二、 版本号生成规范
 
-子工程的版本号严格**以 `package.json` 中的 `version` 字段为准**（当前为 `2.11.0`）：
+子工程的版本号严格**以 `package.json` 中的 `version` 字段为准**（当前为 `3.0.0`）：
 
-$$\text{版本标识} = \underbrace{v\text{Major}.\text{Minor}}_{\text{前两位：package.json 规划版本 (v2.11)}} \,.\, \underbrace{\text{Patch}.\text{Rev}}_{\text{后两位：流水线自动版本号 (0.1)}}$$
+$$\text{版本标识} = \underbrace{v\text{Major}.\text{Minor}}_{\text{前两位：package.json 规划版本 (v3.0)}} \,.\, \underbrace{\text{Patch}.\text{Rev}}_{\text{后两位：流水线自动版本号 (0.1)}}$$
 
 1. **前两位（规划版本）**：
-   - 规则：取 `package.json` 的主版本与次版本（如 `2.11.0` 对应 `v2.11`）；
-   - 在 `changes/` 目录中的文件名严格以该两段命名，如 `changes/v2.11.md`。
+   - 规则：取 `package.json` 的主版本与次版本（如 `3.0.0` 对应 `v3.0`）；
+   - 在 `changes/` 目录中的文件名严格以该两段命名，如 `changes/v3.0.md`。
 2. **后两位（流水线自动版本号）**：
-   - 规则：由 CI 流水线基于 Patch 与构建触发序号自动补全（如 `Build 2.11.0.1`），并在构建产物、日志控制台及部署报告中统一展示。
+   - 规则：由 CI 流水线基于 Patch 与构建触发序号自动补全（如 `Build 3.0.0.1`），并在构建产物、日志控制台及部署报告中统一展示。
    - **注意区别**：只有总项目（根目录）才以当前 Git 分支名称为版本号；子项目一律以其 `package.json` 为准。
 
 
